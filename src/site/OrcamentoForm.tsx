@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { notificacoes, registrar } from '../services/db'
+import { linkWhatsApp } from '../services/whatsapp'
 import { tiposEvento } from '../data/conteudo'
 
 const vazio = { nome: '', email: '', telefone: '', tipo: tiposEvento[0], data: '', convidados: '', mensagem: '' }
@@ -8,6 +9,7 @@ export default function OrcamentoForm() {
   const [f, setF] = useState(vazio)
   const [erro, setErro] = useState('')
   const [enviado, setEnviado] = useState(false)
+  const [linkZap, setLinkZap] = useState('')
 
   const set = (campo: keyof typeof vazio, valor: string) => setF((s) => ({ ...s, [campo]: valor }))
 
@@ -35,6 +37,11 @@ export default function OrcamentoForm() {
       detalhe: linhas.join('\n'),
     })
     registrar('Recebeu', 'Orçamento', `Pedido de ${f.nome}`)
+
+    const link = linkWhatsApp('Olá! Gostaria de solicitar um orçamento.\n\n' + linhas.join('\n'))
+    setLinkZap(link)
+    window.open(link, '_blank', 'noopener,noreferrer')
+
     setEnviado(true)
     setF(vazio)
   }
@@ -42,8 +49,9 @@ export default function OrcamentoForm() {
   if (enviado) {
     return (
       <div className="form-ok" role="status">
-        Recebemos seu pedido. Em breve entraremos em contato para combinar os detalhes.
-        <div style={{ marginTop: '1rem' }}>
+        Recebemos seu pedido. Se o WhatsApp não abriu, clique abaixo para enviar a mensagem.
+        <div style={{ marginTop: '1rem', display: 'flex', gap: '.75rem', flexWrap: 'wrap' }}>
+          <a className="btn btn-gold" href={linkZap} target="_blank" rel="noopener noreferrer">Abrir WhatsApp</a>
           <button className="btn btn-ghost" onClick={() => setEnviado(false)}>Enviar outro pedido</button>
         </div>
       </div>
