@@ -1,0 +1,29 @@
+:root {
+  /* Cores da identidade nova (landing) */
+  --bg: #0a0905;
+  --bg-raised: #14120b;
+  --ink: #e6e1d6;
+  --ink-soft: #c9b89a;
+  --gold: #c9a74a;
+  --gold-deep: #b07d2a;
+  --gold-light: #f4d96b;
+  --gold-gradient: linear-gradient(90deg, #b07d2a 0%, #f4d96b 50%, #b07d2a 100%);
+  --gold-gradient-v: linear-gradient(180deg, #ebe3b4 0%, #a39349 100%);
+
+  /* Painel */
+  --p-bg: #1a1a1a;
+  --p-side: #0d0d0d;
+  --p-card: #262626;
+  --p-card-2: #333333;
+  --p-line: #3d3d3d;
+  --p-text: #f3f3f3;
+  --p-muted: #9a9a9a;
+
+  --ok: #4cf04c;
+  --info: #4d94ff;
+  --danger: #ff4d4d;
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-logo: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Jost', system-ui, sans-serif;
+}
